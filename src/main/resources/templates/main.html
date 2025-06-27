@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Forum Koszykarskie</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="logo.png" alt="Logo koszykówki" class="logo">
+        <h1 class="forum-title">Forum Koszykarskie</h1>
+    </div>
+    <div class="header-right">
+        <a th:if="${session.user == null}" href="/login" class="login-button">Zaloguj</a>
+        <a th:if="${session.user == null}" href="/register" class="login-button">Załóż Konto</a>
+        <a th:if="${session.user != null}" href="/logout" class="login-button">Wyloguj</a>
+    </div>
+</header>
+
+<main class="main-content">
+    <h2>Tematy</h2>
+
+    <div class="topic" th:each="topic : ${topics}">
+        <h3 th:text="${topic.title}"></h3>
+        <p>Ostatni post: <strong>LeBron znów w formie!</strong></p>
+        <a href="/temat/nba-2025" class="topic-button">Zobacz posty</a>
+
+        <div class="topic-meta">
+            <span class="author" th:text="${'Autor: ' + topic.author}"></span>
+            <span class="created-at" th:text="${'Data: ' + topic.creationDate}" ></span>
+        </div>
+    </div>
+
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 Forum Koszykarskie</p>
+</footer>
+
+</body>
+</html>
