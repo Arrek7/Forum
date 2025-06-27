@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie – Forum Koszykarskie</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="logo.png" alt="Logo koszykówki" class="logo">
+        <h1 class="forum-title">Forum Koszykarskie</h1>
+    </div>
+</header>
+
+<main class="main-content">
+    <h2>Zaloguj się</h2>
+
+    <form method="post" class="form-card">
+        <label for="username">Nazwa użytkownika</label>
+        <input type="text" id="username" name="login" required>
+
+        <label for="password">Hasło</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="login-button">Zaloguj</button>
+
+        <p class="form-footer">Nie masz konta? <a href="/register">Załóż je</a></p>
+    </form>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 Forum Koszykarskie</p>
+</footer>
+
+</body>
+</html>
