@@ -5,6 +5,7 @@ import com.comarch.szkolenia.forum.model.Topic;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -14,14 +15,14 @@ public class TopicRepository implements ITopicDAO {
 
     public TopicRepository() {
         this.topics.add(
-                new Topic(1, "NBA 2025",
-                        "Admin", "2025-06-22"));
+                new Topic(1,  "NBA 2025",
+                        "Admin", "2025-06-22", Collections.emptyList()));
         this.topics.add(
                 new Topic(2, "EuroBasket",
-                        "Admin", "2025-06-23"));
+                        "Admin", "2025-06-23", Collections.emptyList()));
         this.topics.add(
                 new Topic(3, "StreetBall",
-                        "Admin", "2025-06-24"));
+                        "Admin", "2025-06-24", Collections.emptyList()));
     }
 
     @Override

@@ -29,12 +29,19 @@
 
     <div class="topic" th:each="topic : ${topics}">
         <h3 th:text="${topic.title}"></h3>
-        <p>Ostatni post: <strong>LeBron znów w formie!</strong></p>
-        <a href="/temat/nba-2025" class="topic-button">Zobacz posty</a>
+        <p th:if="${topic.posts != null and !topic.posts.isEmpty()}">
+            Ostatni post:
+            <strong th:text="${topic.posts.get(topic.posts.size() - 1).content}">Treść ostatniego posta</strong>
+        </p>
+        <p th:if="${topic.posts == null or #lists.isEmpty(topic.posts)}">
+            Brak postów w tym temacie.
+        </p>
+
+        <a th:href="@{'/temat/' + ${topic.id}}" class="topic-button">Zobacz posty</a>
 
         <div class="topic-meta">
             <span class="author" th:text="${'Autor: ' + topic.author}"></span>
-            <span class="created-at" th:text="${'Data: ' + topic.creationDate}" ></span>
+            <span class="created-at" th:text="${'Data: ' + topic.creationDate}"></span>
         </div>
     </div>
 

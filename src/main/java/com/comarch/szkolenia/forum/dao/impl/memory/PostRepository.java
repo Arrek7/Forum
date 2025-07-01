@@ -13,9 +13,9 @@ public class PostRepository implements IPostDAO {
     private int lastId = 3;
 
     public PostRepository () {
-        this.posts.add(new Post(1, "Admin", "LeBron znów w formie!", "NBA 2025", "2025-06-22"));
-        this.posts.add(new Post(2, "Janusz", "Kto wygra EuroBasket?", "EuroBasket", "2025-06-23"));
-        this.posts.add(new Post(3, "Admin", "StreetBall to nie tylko gra!", "StreetBall", "2025-06-24"));
+        this.posts.add(new Post(1, 1, "Admin", "LeBron znów w formie!", "2025-06-22"));
+        this.posts.add(new Post(2, 2, "Admin", "Kto wygra EuroBasket?", "2025-06-23"));
+        this.posts.add(new Post(3, 3,"Admin", "StreetBall to nie tylko gra!", "2025-06-24"));
 
     }
     @Override
