@@ -16,4 +16,9 @@ public class CommonController {
         model.addAttribute("topics", this.topicDAO.getAll());
         return "main";
     }
+
+    @GetMapping("/FAQ")
+    public String FAQ() {
+        return "FAQ";
+    }
 }

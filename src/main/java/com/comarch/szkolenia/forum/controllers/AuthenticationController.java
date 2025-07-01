@@ -60,4 +60,9 @@ public class AuthenticationController {
         session.removeAttribute("user");
         return "redirect:/main";
     }
+
+    @GetMapping("/dodaj-temat")
+    public String dodajTemat() {
+        return "dodaj-temat";
+    }
 }
