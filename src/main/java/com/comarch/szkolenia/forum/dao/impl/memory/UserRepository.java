@@ -17,10 +17,10 @@ public class UserRepository implements IUserDAO {
     public UserRepository(IIdSequence idSequence) {
         this.idSequence = idSequence;
         this.users.add(new User(1, "admin", "21232f297a57a5a743894a0e4a801fc3",
-                "Pan", "Admin", User.Role.ADMIN));
+                "Pan", "Admin", User.Role.ADMIN, false));
 
         this.users.add(new User(2, "janusz", "1e6f2ac43951a6721d3d26a379cc7f8b",
-                "Janusz", "Kowalski", User.Role.USER));
+                "Janusz", "Kowalski", User.Role.USER, false));
     }
 
     @Override
