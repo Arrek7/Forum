@@ -2,6 +2,7 @@ package com.comarch.szkolenia.forum.controllers;
 
 import com.comarch.szkolenia.forum.model.Post;
 import com.comarch.szkolenia.forum.model.Topic;
+import com.comarch.szkolenia.forum.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,9 +53,13 @@ public class CommonController {
         if(userObj == null || title == null || title.trim().isEmpty()) {
             return "redirect:/main";
         }
+        User user = (User) userObj;
+        if(user.isBanned()) {
+            return "redirect:/main";
+        }
         Topic topic = new Topic();
         topic.setTitle(title);
-        topic.setAuthor(((com.comarch.szkolenia.forum.model.User)userObj).getLogin());
+        topic.setAuthor(user.getLogin());
         topic.setCreationDate(LocalDate.now().toString());
         topic.setPosts(new ArrayList<>());
         topicService.addTopic(topic);
@@ -81,9 +86,13 @@ public class CommonController {
         if(userObj == null || content == null || content.trim().isEmpty()) {
             return "redirect:/temat/" + topicId;
         }
+        User user = (User) userObj;
+        if(user.isBanned()) {
+            return "redirect:/temat/" + topicId;
+        }
         Post post = new Post();
         post.setTopicId(topicId);
-        post.setAuthor(((com.comarch.szkolenia.forum.model.User)userObj).getLogin());
+        post.setAuthor(user.getLogin());
         post.setContent(content);
         post.setCreationDate(java.time.LocalDate.now().toString());
         postService.addPost(post);
