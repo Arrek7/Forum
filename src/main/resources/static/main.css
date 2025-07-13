@@ -5,37 +5,45 @@ body {
     color: #222;
 }
 
+/* HEADER - ogólny kontener */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background-color: #111;
     color: white;
     padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
-.header-left {
+/* Górna część: logo + tytuł */
+.header-top {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin: 0 auto;
 }
 
+/* Dolna część: przyciski */
+.header-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Logo */
 .logo {
     height: 50px;
 }
 
+/* Tytuł forum */
 .forum-title {
     font-size: 24px;
     font-weight: bold;
     margin: 0;
 }
 
-.header-right {
-    position: absolute;
-    right: 40px;
-}
-
+/* Przyciski logowania / paneli */
 .login-button {
     background-color: #ff6600;
     color: white;
@@ -50,6 +58,7 @@ body {
     background-color: #e65c00;
 }
 
+/* Główna treść strony */
 .main-content {
     max-width: 800px;
     margin: 40px auto;
@@ -61,18 +70,21 @@ h2 {
     margin-bottom: 20px;
 }
 
+/* Pojedynczy temat */
 .topic {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
 }
 
 .topic h3 {
     margin-top: 0;
 }
 
+/* Przycisk do przejścia do tematu */
 .topic-button {
     display: inline-block;
     margin-top: 10px;
@@ -88,17 +100,7 @@ h2 {
     background-color: #005ecb;
 }
 
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #111;
-    color: white;
-}
-
-.topic {
-    position: relative;
-}
-
+/* Informacje o autorze i dacie tematu */
 .topic-meta {
     position: absolute;
     right: 20px;
@@ -114,6 +116,7 @@ h2 {
     display: block;
 }
 
+/* Formularze */
 .form-card {
     background-color: white;
     padding: 30px;
@@ -155,11 +158,28 @@ h2 {
     text-decoration: underline;
 }
 
+/* Nagłówek sekcji z tematami */
 .topics-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+}
+
+/* Formularz dodawania tematu */
+.add-topic-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.styled-input {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    flex-grow: 1;
+    max-width: 300px;
 }
 
 .add-topic-button {
@@ -178,6 +198,8 @@ h2 {
 .add-topic-button:hover {
     background-color: #218838;
 }
+
+/* Pojedynczy post */
 .post {
     margin: 20px 0;
     padding: 16px;
@@ -194,17 +216,11 @@ h2 {
     font-size: 0.9em;
     color: #666;
 }
-.add-topic-form {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
 
-.styled-input {
-    padding: 10px 14px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    flex-grow: 1;
-    max-width: 300px;
+/* Stopka */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    color: white;
 }

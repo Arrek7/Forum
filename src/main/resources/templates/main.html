@@ -8,11 +8,11 @@
 <body>
 
 <header class="header">
-    <div class="header-left">
+    <div class="header-top">
         <img src="logo.png" alt="Logo koszykówki" class="logo">
         <h1 class="forum-title">Forum Koszykarskie</h1>
     </div>
-    <div class="header-right">
+    <div class="header-bottom">
         <a th:if="${session.user == null}" href="/login" class="login-button">Zaloguj</a>
         <a th:if="${session.user == null}" href="/register" class="login-button">Załóż Konto</a>
         <a th:if="${session.user != null}" href="/logout" class="login-button">Wyloguj</a>
