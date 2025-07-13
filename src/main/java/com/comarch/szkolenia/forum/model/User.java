@@ -15,9 +15,11 @@ public class User {
     private String name;
     private String surname;
     private Role role;
+    private boolean banned = false;
 
     public enum Role {
         USER,
+        MODERATOR,
         ADMIN
     }
 }
