@@ -13,5 +13,5 @@ public class Post {
     private int topicId;
     private String author;
     private String content;
-    private String createdAt;
+    private String creationDate;
 }

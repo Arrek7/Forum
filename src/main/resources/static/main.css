@@ -167,11 +167,44 @@ h2 {
     color: white;
     padding: 10px 18px;
     text-decoration: none;
+    border: none;
     border-radius: 6px;
     font-weight: bold;
+    font-size: 16px;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
 .add-topic-button:hover {
     background-color: #218838;
+}
+.post {
+    margin: 20px 0;
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+.post-content {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: #666;
+}
+.add-topic-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.styled-input {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    flex-grow: 1;
+    max-width: 300px;
 }

@@ -1,7 +1,11 @@
 package com.comarch.szkolenia.forum.controllers;
 
 import com.comarch.szkolenia.forum.dao.IUserDAO;
+import com.comarch.szkolenia.forum.exceptions.LoginAlreadyExistException;
+import com.comarch.szkolenia.forum.exceptions.UserValidationException;
 import com.comarch.szkolenia.forum.model.User;
+import com.comarch.szkolenia.forum.services.IAuthenticationService;
+import com.comarch.szkolenia.forum.validators.UserValidator;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequiredArgsConstructor
 public class AuthenticationController {
-    private final IUserDAO userDAO;
+    private final IAuthenticationService authenticationService;
 
 
     @GetMapping("/register")
@@ -27,12 +31,13 @@ public class AuthenticationController {
     @PostMapping("/register")
     public String reregister(@ModelAttribute User user,
                              @RequestParam("password2") String password2) {
-        if(!user.getPassword().equals(password2) || this.userDAO.getByLogin(user.getLogin()) != null) {
+        try{
+            UserValidator.validateUser(user);
+            UserValidator.checkPasswordsMatch(user.getPassword(), password2);
+            this.authenticationService.register(user);
+        } catch (UserValidationException | LoginAlreadyExistException e) {
             return "redirect:/register";
         }
-        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
-        user.setRole(User.Role.USER);
-        this.userDAO.persist(user);
 
         return "redirect:/main";
     }
@@ -46,18 +51,23 @@ public class AuthenticationController {
     public String login(@RequestParam("login") String login,
                         @RequestParam("password") String password,
                         HttpSession session) {
-        User user = this.userDAO.getByLogin(login);
-        if(user != null && DigestUtils.md5DigestAsHex(password.getBytes()).equals(user.getPassword())){
-            session.setAttribute("user", user);
-            return "redirect:/main";
+        try {
+            UserValidator.validateLogin(login);
+            UserValidator.validatePassword(password);
+        } catch (UserValidationException e) {
+            return "redirect:/login";
         }
 
-        return "redirect:/login";
+        this.authenticationService.authenticate(login, password);
+        if(session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+        return "redirect:/main";
     }
 
     @GetMapping("/logout")
-    public String logut(HttpSession session) {
-        session.removeAttribute("user");
+    public String logout() {
+        this.authenticationService.logout();
         return "redirect:/main";
     }
 

@@ -23,8 +23,10 @@
 <main class="main-content">
     <div class="topics-header">
         <h2>Tematy</h2>
-        <a th:if="${session.user != null}"
-           href="/dodaj-temat" class="add-topic-button">Dodaj temat</a>
+        <form th:if="${session.user != null}" th:action="@{/dodaj-temat}" method="post" class="add-topic-form">
+            <input type="text" name="title" placeholder="Wpisz nowy temat" required class="topic-input styled-input" />
+            <button type="submit" class="add-topic-button">Dodaj</button>
+        </form>
     </div>
 
     <div class="topic" th:each="topic : ${topics}">
@@ -37,7 +39,7 @@
             Brak postów w tym temacie.
         </p>
 
-        <a th:href="@{'/temat/' + ${topic.id}}" class="topic-button">Zobacz posty</a>
+        <a th:href="@{/temat/{id}(id=${topic.id})}" class="topic-button">Zobacz posty</a>
 
         <div class="topic-meta">
             <span class="author" th:text="${'Autor: ' + topic.author}"></span>

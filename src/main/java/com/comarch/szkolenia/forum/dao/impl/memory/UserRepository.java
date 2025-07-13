@@ -2,17 +2,20 @@ package com.comarch.szkolenia.forum.dao.impl.memory;
 
 import com.comarch.szkolenia.forum.dao.IUserDAO;
 import com.comarch.szkolenia.forum.model.User;
-import org.springframework.stereotype.Component;
+import com.comarch.szkolenia.forum.services.IIdSequence;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Component
+@Repository
 public class UserRepository implements IUserDAO {
     private final List<User> users = new ArrayList<>();
-    private int lastId = 2;
+    private final IIdSequence idSequence;
 
-    public UserRepository() {
+    public UserRepository(IIdSequence idSequence) {
+        this.idSequence = idSequence;
         this.users.add(new User(1, "admin", "21232f297a57a5a743894a0e4a801fc3",
                 "Pan", "Admin", User.Role.ADMIN));
 
@@ -22,29 +25,29 @@ public class UserRepository implements IUserDAO {
 
     @Override
     public void persist(User user) {
-        user.setId(++this.lastId);
+        user.setId(this.idSequence.getNextId());
         this.users.add(user);
 
     }
 
     @Override
-    public User getById(int id) {
+    public Optional<User> getById(int id) {
         for (User user : this.users) {
             if(user.getId() == id) {
-                return user;
+                return Optional.of(user);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
-    public User getByLogin(String login) {
+    public Optional<User> getByLogin(String login) {
         for(User user : this.users) {
             if(user.getLogin().equals(login)){
-                return user;
+                return Optional.of(user);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

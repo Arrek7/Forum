@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${topic.title}">Temat</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-left">
+        <img src="/logo.png" alt="Logo koszykówki" class="logo">
+        <h1 class="forum-title">Forum Koszykarskie</h1>
+    </div>
+    <div class="header-right">
+        <a href="/main" class="login-button">Strona główna</a>
+    </div>
+</header>
+<main class="main-content">
+    <div class="topic-details" style="display:flex;align-items:center;justify-content:space-between;">
+        <h2 th:text="${topic.title}" style="margin:0;"></h2>
+        <div class="add-topic-form" th:if="${session.user != null}">
+            <form th:action="@{'/dodaj-post/' + ${topic.id}}" method="post" class="add-topic-form">
+                <input type="text" name="content" placeholder="Wpisz treść posta" required class="topic-input styled-input"/>
+                <button type="submit" class="add-topic-button">Dodaj post</button>
+            </form>
+        </div>
+    </div>
+    <div class="posts-section">
+        <div th:if="${posts != null and !posts.isEmpty()}" th:each="post : ${posts}" class="post">
+            <div class="post-content" th:text="${post.content}"></div>
+            <div class="post-meta">
+                <span th:text="${'Autor: ' + post.author}"></span> |
+                <span th:text="${'Data: ' + post.creationDate}"></span>
+            </div>
+        </div>
+        <p th:if="${posts == null or #lists.isEmpty(posts)}">Brak postów w tym temacie.</p>
+    </div>
+</main>
+<footer class="footer">
+    <p>&copy; 2025 Forum Koszykarskie</p>
+</footer>
+</body>
+</html>
