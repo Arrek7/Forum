@@ -9,5 +9,5 @@ public interface IPostService {
     List<Post> getPostsByTopicId(int topicId);
     Optional<Post> getPostById(int id);
     void addPost(Post post);
+    void deletePost(int id);
 }
-

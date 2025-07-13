@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel administratora</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-left">
+        <img src="/logo.png" alt="Logo koszykówki" class="logo">
+        <h1 class="forum-title">Forum Koszykarskie</h1>
+    </div>
+    <div class="header-right">
+        <a href="/main" class="login-button">Strona główna</a>
+    </div>
+</header>
+<main class="main-content">
+    <div class="form-card">
+        <h2>Panel administratora</h2>
+        <h3>Użytkownicy</h3>
+        <table style="width:100%;margin-bottom:20px;">
+            <tr>
+                <th>Login</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Rola</th>
+                <th>Status</th>
+                <th>Akcje</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.login}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.surname}"></td>
+                <td th:text="${user.role}"></td>
+                <td th:text="${user.banned ? 'Zbanowany' : 'Aktywny'}"></td>
+                <td>
+                    <form th:if="${user.role.name() == 'USER'}" th:action="@{'/admin-promote/' + ${user.id}}" method="post" style="display:inline;">
+                        <button type="submit" class="add-topic-button" style="background-color:#007bff;">Nadaj MODERATORA</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</main>
+<footer class="footer">
+    <p>&copy; 2025 Forum Koszykarskie</p>
+</footer>
+</body>
+</html>
+

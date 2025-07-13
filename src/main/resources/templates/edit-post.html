@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edycja posta</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-left">
+        <img src="/logo.png" alt="Logo koszykówki" class="logo">
+        <h1 class="forum-title">Forum Koszykarskie</h1>
+    </div>
+    <div class="header-right">
+        <a href="/main" class="login-button">Strona główna</a>
+    </div>
+</header>
+<main class="main-content">
+    <div class="form-card">
+        <h2>Edycja posta</h2>
+        <form th:action="@{'/edit-post/' + ${post.id}}" method="post">
+            <label for="content">Treść posta:</label>
+            <input type="text" id="content" name="content" th:value="${post.content}" required>
+            <button type="submit" class="add-topic-button">Zapisz zmiany</button>
+        </form>
+    </div>
+</main>
+<footer class="footer">
+    <p>&copy; 2025 Forum Koszykarskie</p>
+</footer>
+</body>
+</html>
+

@@ -17,6 +17,10 @@
         <a th:if="${session.user == null}" href="/register" class="login-button">Załóż Konto</a>
         <a th:if="${session.user != null}" href="/logout" class="login-button">Wyloguj</a>
         <a href="/FAQ" class="login-button">FAQ</a>
+        <a th:if="${session.user != null}" href="/edit-profile" class="login-button">Edytuj profil</a>
+        <a th:if="${session.user != null}" href="/my-posts" class="login-button">Moje posty</a>
+        <a th:if="${session.user != null and session.user.role.name() == 'MODERATOR'}" href="/moderator-panel" class="login-button">Panel moderatora</a>
+        <a th:if="${session.user != null and session.user.role.name() == 'ADMIN'}" href="/admin-panel" class="login-button">Panel admina</a>
     </div>
 </header>
 

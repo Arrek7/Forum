@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Moje posty</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-left">
+        <img src="/logo.png" alt="Logo koszykówki" class="logo">
+        <h1 class="forum-title">Forum Koszykarskie</h1>
+    </div>
+    <div class="header-right">
+        <a href="/main" class="login-button">Strona główna</a>
+    </div>
+</header>
+<main class="main-content">
+    <div class="form-card">
+        <h2>Moje posty</h2>
+        <div th:if="${posts != null and !posts.isEmpty()}" th:each="post : ${posts}" class="post">
+            <div class="post-content" th:text="${post.content}"></div>
+            <div class="post-meta">
+                <span th:text="${'Temat: ' + post.topicId}"></span> |
+                <span th:text="${'Data: ' + post.creationDate}"></span>
+            </div>
+            <form th:action="@{'/edit-post/' + ${post.id}}" method="get" style="display:inline;">
+                <button type="submit" class="add-topic-button">Edytuj</button>
+            </form>
+            <form th:action="@{'/delete-post/' + ${post.id}}" method="post" style="display:inline;">
+                <button type="submit" class="add-topic-button" style="background-color:#dc3545;">Usuń</button>
+            </form>
+        </div>
+        <p th:if="${posts == null or #lists.isEmpty(posts)}">Nie masz jeszcze żadnych postów.</p>
+    </div>
+</main>
+<footer class="footer">
+    <p>&copy; 2025 Forum Koszykarskie</p>
+</footer>
+</body>
+</html>
+

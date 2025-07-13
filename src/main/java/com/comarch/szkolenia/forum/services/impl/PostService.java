@@ -29,4 +29,9 @@ public class PostService implements IPostService {
     public void addPost(Post post) {
         postDAO.persist(post);
     }
+
+    @Override
+    public void deletePost(int id) {
+        postDAO.deletePost(id);
+    }
 }

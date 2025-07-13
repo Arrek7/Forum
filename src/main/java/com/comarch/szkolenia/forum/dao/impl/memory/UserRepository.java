@@ -25,9 +25,17 @@ public class UserRepository implements IUserDAO {
 
     @Override
     public void persist(User user) {
-        user.setId(this.idSequence.getNextId());
-        this.users.add(user);
-
+        if(user.getId() == 0) {
+            user.setId(this.idSequence.getNextId());
+            this.users.add(user);
+        } else {
+            for(int i=0; i<this.users.size(); i++) {
+                if(this.users.get(i).getId() == user.getId()) {
+                    this.users.set(i, user);
+                    return;
+                }
+            }
+        }
     }
 
     @Override
@@ -55,4 +63,3 @@ public class UserRepository implements IUserDAO {
         return this.users;
     }
 }
-

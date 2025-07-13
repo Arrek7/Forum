@@ -11,6 +11,7 @@ public interface IPostDAO {
     Optional<Post> getById(int id);
     void persist(Post post);
     List<Post> getAllByTopicId(int topicId);
+    void deletePost(int id);
 
 
 

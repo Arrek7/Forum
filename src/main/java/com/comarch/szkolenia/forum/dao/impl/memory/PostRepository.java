@@ -53,4 +53,14 @@ public class PostRepository implements IPostDAO {
         }
         return result;
     }
+
+    @Override
+    public void deletePost(int id) {
+        for(int i=0; i<this.posts.size(); i++) {
+            if(this.posts.get(i).getId() == id) {
+                this.posts.remove(i);
+                return;
+            }
+        }
+    }
 }

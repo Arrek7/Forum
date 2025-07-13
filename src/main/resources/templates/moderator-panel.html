@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel moderatora</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-left">
+        <img src="/logo.png" alt="Logo koszykówki" class="logo">
+        <h1 class="forum-title">Forum Koszykarskie</h1>
+    </div>
+    <div class="header-right">
+        <a href="/main" class="login-button">Strona główna</a>
+    </div>
+</header>
+<main class="main-content">
+    <div class="form-card">
+        <h2>Panel moderatora</h2>
+        <h3>Użytkownicy</h3>
+        <table style="width:100%;margin-bottom:20px;">
+            <tr>
+                <th>Login</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Rola</th>
+                <th>Status</th>
+                <th>Akcje</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.login}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.surname}"></td>
+                <td th:text="${user.role}"></td>
+                <td th:text="${user.banned ? 'Zbanowany' : 'Aktywny'}"></td>
+                <td>
+                    <form th:if="${user.role.name() == 'USER'}" th:action="@{'/ban-user/' + ${user.id}}" method="post" style="display:inline;">
+                        <button type="submit" class="add-topic-button" style="background-color:#dc3545;">Banuj</button>
+                    </form>
+                    <form th:if="${user.role.name() == 'USER' && user.banned}" th:action="@{'/unban-user/' + ${user.id}}" method="post" style="display:inline;">
+                        <button type="submit" class="add-topic-button" style="background-color:#28a745;">Odbanuj</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <h3>Posty</h3>
+        <div th:if="${posts != null and !posts.isEmpty()}" th:each="post : ${posts}" class="post">
+            <div class="post-content" th:text="${post.content}"></div>
+            <div class="post-meta">
+                <span th:text="${'Autor: ' + post.author}"></span> |
+                <span th:text="${'Data: ' + post.creationDate}"></span>
+            </div>
+            <form th:action="@{'/moderator-delete-post/' + ${post.id}}" method="post" style="display:inline;">
+                <button type="submit" class="add-topic-button" style="background-color:#dc3545;">Usuń</button>
+            </form>
+        </div>
+        <p th:if="${posts == null or #lists.isEmpty(posts)}">Brak postów do moderacji.</p>
+    </div>
+</main>
+<footer class="footer">
+    <p>&copy; 2025 Forum Koszykarskie</p>
+</footer>
+</body>
+</html>
+
