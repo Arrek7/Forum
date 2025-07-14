@@ -28,18 +28,18 @@
                 <th>Status</th>
                 <th>Akcje</th>
             </tr>
-            <tr th:each="user : ${users}">
+            <tr th:each="user : ${users}" th:if="${user.role.name() != 'ADMIN' && user.role.name() != 'MODERATOR'}">
                 <td th:text="${user.login}"></td>
                 <td th:text="${user.name}"></td>
                 <td th:text="${user.surname}"></td>
                 <td th:text="${user.role}"></td>
                 <td th:text="${user.banned ? 'Zbanowany' : 'Aktywny'}"></td>
                 <td>
-                    <form th:if="${user.role.name() == 'USER' && !user.banned}" th:action="@{'/ban-user/' + ${user.id}}" method="post" style="display:inline;">
-                        <button type="submit" class="add-topic-button" style="background-color:#dc3545;">Banuj</button>
+                    <form th:if="${!user.banned}" th:action="@{'/ban-user/' + ${user.id}}" method="post" class="inline-form">
+                        <button type="submit" class="moderator-ban-button">Banuj</button>
                     </form>
-                    <form th:if="${user.role.name() == 'USER' && user.banned}" th:action="@{'/unban-user/' + ${user.id}}" method="post" style="display:inline;">
-                        <button type="submit" class="add-topic-button" style="background-color:#28a745;">Odbanuj</button>
+                    <form th:if="${user.banned}" th:action="@{'/unban-user/' + ${user.id}}" method="post" class="inline-form">
+                        <button type="submit" class="moderator-unban-button">Odbanuj</button>
                     </form>
                 </td>
             </tr>
@@ -51,8 +51,8 @@
                 <span th:text="${'Autor: ' + post.author}"></span> |
                 <span th:text="${'Data: ' + post.creationDate}"></span>
             </div>
-            <form th:action="@{'/moderator-delete-post/' + ${post.id}}" method="post" style="display:inline;">
-                <button type="submit" class="add-topic-button" style="background-color:#dc3545;">Usuń</button>
+            <form th:action="@{'/moderator-delete-post/' + ${post.id}}" method="post" class="inline-form">
+                <button type="submit" class="moderator-ban-button">Usuń</button>
             </form>
         </div>
         <p th:if="${posts == null or #lists.isEmpty(posts)}">Brak postów do moderacji.</p>

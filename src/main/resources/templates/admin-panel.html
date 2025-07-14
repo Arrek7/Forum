@@ -16,10 +16,10 @@
     </div>
 </header>
 <main class="main-content">
-    <div class="form-card">
+    <div class="admin-panel">
         <h2>Panel administratora</h2>
         <h3>Użytkownicy</h3>
-        <table style="width:100%;margin-bottom:20px;">
+        <table class="admin-table">
             <tr>
                 <th>Login</th>
                 <th>Imię</th>
@@ -35,17 +35,20 @@
                 <td th:text="${user.role}"></td>
                 <td th:text="${user.banned ? 'Zbanowany' : 'Aktywny'}"></td>
                 <td>
-                    <form th:if="${user.role.name() == 'USER'}" th:action="@{'/admin-promote/' + ${user.id}}" method="post" style="display:inline;">
-                        <button type="submit" class="add-topic-button" style="background-color:#007bff;">Nadaj MODERATORA</button>
+                    <form th:if="${user.role.name() == 'USER'}" th:action="@{'/admin-promote/' + ${user.id}}" method="post" class="inline-form">
+                        <button type="submit" class="add-topic-button">Nadaj MODERATORA</button>
+                    </form>
+                    <form th:if="${user.role.name() == 'MODERATOR'}" th:action="@{'/admin-demote/' + ${user.id}}" method="post" class="inline-form">
+                        <button type="submit" class="moderator-ban-button">Odbierz MODERATORA</button>
                     </form>
                 </td>
             </tr>
         </table>
     </div>
 </main>
+</main>
 <footer class="footer">
     <p>&copy; 2025 Forum Koszykarskie</p>
 </footer>
 </body>
 </html>
-

@@ -19,14 +19,10 @@
     <div class="form-card">
         <h2>Edycja profilu</h2>
         <form th:action="@{/edit-profile}" method="post">
-            <label for="login">Login:</label>
-            <input type="text" id="login" name="login" th:value="${user.login}" required readonly>
-            <label for="name">Imię:</label>
-            <input type="text" id="name" name="name" th:value="${user.name}" required>
-            <label for="surname">Nazwisko:</label>
-            <input type="text" id="surname" name="surname" th:value="${user.surname}" required>
-            <label for="password">Nowe hasło:</label>
-            <input type="password" id="password" name="password">
+            <input type="text" id="login" name="login" th:value="${user.login}" placeholder="Login" required readonly>
+            <input type="text" id="name" name="name" th:value="${user.name}" placeholder="Imię" required>
+            <input type="text" id="surname" name="surname" th:value="${user.surname}" placeholder="Nazwisko" required>
+            <input type="password" id="password" name="password" placeholder="Nowe hasło">
             <button type="submit" class="add-topic-button">Zapisz zmiany</button>
         </form>
     </div>

@@ -34,5 +34,14 @@ public class AdminController {
         userService.changeRole(userId, User.Role.MODERATOR);
         return "redirect:/admin-panel";
     }
-}
 
+    @PostMapping("/admin-demote/{id}")
+    public String demoteModerator(@PathVariable("id") int userId, HttpSession session) {
+        Object userObj = session.getAttribute("user");
+        if(userObj == null || ((User)userObj).getRole() != User.Role.ADMIN) {
+            return "redirect:/main";
+        }
+        userService.changeRole(userId, User.Role.USER);
+        return "redirect:/admin-panel";
+    }
+}

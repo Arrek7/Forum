@@ -16,8 +16,8 @@
     </div>
 </header>
 <main class="main-content">
-    <div class="topic-details" style="display:flex;align-items:center;justify-content:space-between;">
-        <h2 th:text="${topic.title}" style="margin:0;"></h2>
+    <div class="topic-details">
+        <h2 th:text="${topic.title}"></h2>
         <div class="add-topic-form" th:if="${session.user != null}">
             <form th:action="@{'/dodaj-post/' + ${topic.id}}" method="post" class="add-topic-form">
                 <input type="text" name="content" placeholder="Wpisz treść posta" required class="topic-input styled-input"/>
