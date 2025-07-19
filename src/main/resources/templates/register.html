@@ -13,26 +13,29 @@
         <img src="logo.png" alt="Logo koszykówki" class="logo">
         <h1 class="forum-title">Forum Koszykarskie</h1>
     </div>
+    <div class="header-right">
+        <a href="/main" class="login-button">Strona główna</a>
+    </div>
 </header>
 
 <main class="main-content">
     <h2>Załóż konto</h2>
 
-    <form method="post" class="form-card">
-        <label for="username">Nazwa użytkownika</label>
-        <input th:field="*{userObject.login}" type="text" id="username" name="login" required>
+    <form method="post" class="form-card" onsubmit="return validateRegisterForm()">
+        <label for="login-field">Nazwa użytkownika</label>
+        <input th:field="*{userObject.login}" type="text" id="login-field" name="login" required>
 
-        <label for="password">Hasło</label>
-        <input th:field="*{userObject.password}" type="password" id="password" name="password" required>
+        <label for="password-field">Hasło</label>
+        <input th:field="*{userObject.password}" type="password" id="password-field" name="password" required>
 
-        <label for="password2">Powtórz Hasło</label>
-        <input type="password" id="password2" name="password2" required>
+        <label for="password2-field">Powtórz Hasło</label>
+        <input type="password" id="password2-field" name="password2" required>
 
-        <label for="name">Imię</label>
-        <input th:field="*{userObject.name}" type="text" id="name" name="name" required>
+        <label for="name-field">Imię</label>
+        <input th:field="*{userObject.name}" type="text" id="name-field" name="name" required>
 
-        <label for="surname">Nazwisko</label>
-        <input th:field="*{userObject.surname}" type="text" id="surname" name="surname" required>
+        <label for="surname-field">Nazwisko</label>
+        <input th:field="*{userObject.surname}" type="text" id="surname-field" name="surname" required>
 
         <button type="submit" class="login-button">Zarejestruj się</button>
     </form>

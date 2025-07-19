@@ -4,7 +4,6 @@ function validateRegisterForm() {
     var password2 = document.getElementById("password2-field");
     var name = document.getElementById("name-field");
     var surname = document.getElementById("surname-field");
-    var age = document.getElementById("age-field");
 
     var loginRegex = new RegExp("^\\w{4,}$");
     var passwordRegex = new RegExp("^\\w{5,}$");

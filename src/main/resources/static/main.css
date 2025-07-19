@@ -346,3 +346,8 @@ h2 {
 .inline-form {
     display: inline;
 }
+
+input[style*="background: #fac0c0"] {
+    border: 2px solid #d00;
+    box-shadow: 0 0 6px #d00;
+}
